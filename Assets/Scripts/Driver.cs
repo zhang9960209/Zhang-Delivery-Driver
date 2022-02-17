@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Driver : MonoBehaviour
 {
-    [SerializeField]float fltTurningSpeed = 1f;
-    [SerializeField] float fltMovingSpeed = 0.01f;
-    
+    [SerializeField] float fltTurningSpeed = 1f;
+    [SerializeField] float fltMovingSpeed = 0.1f;
+    [SerializeField] float fltBoostspeed = 20f;
+    [SerializeField] float fltSlowSpeed = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,4 +25,16 @@ public class Driver : MonoBehaviour
 
     }
     
+    void OnTriggerEnter2D (Collider2D other)
+    {
+        if(other.tag == "boost")
+        {
+            fltMovingSpeed = fltBoostspeed;
+        }
+    }
+    
+    void OnCollisionEnter2D (Collision2D other)
+    {
+        fltMovingSpeed = fltSlowSpeed;
+    }
 }
